@@ -6,44 +6,109 @@
              x:DataType="vm:MainViewModel">
 
     <TabControl>
+        <!-- ============ КЛИЕНТЫ ============ -->
         <TabItem Header="Клиенты">
-            <ListBox x:Name="ClientsList" Margin="10">
-                <ListBox.ItemTemplate>
-                    <DataTemplate x:DataType="data:Client">
-                        <StackPanel>
-                            <TextBlock Text="{Binding FullName}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Phone}" FontSize="12"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto">
+                <TextBlock Grid.Row="0" Text="Имя:" Margin="10,10,10,0"/>
+                <TextBox Grid.Row="0" x:Name="ClientNameBox" Margin="10,30,10,0"/>
+                
+                <TextBlock Grid.Row="1" Text="Телефон:" Margin="10,10,10,0"/>
+                <TextBox Grid.Row="1" x:Name="ClientPhoneBox" Margin="10,30,10,0"/>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,0,0">
+                    <CheckBox x:Name="ClientIsRegularBox" Content="Постоянный"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,10,0,0">
+                    <Button x:Name="AddClientBtn" Content="Добавить" Click="AddClient_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="DeleteClientBtn" Content="Удалить" Click="DeleteClient_Click"/>
+                </StackPanel>
+
+                <ListBox Grid.Row="4" x:Name="ClientsList" Margin="10,10,10,0" SelectionChanged="ClientsList_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="data:Client">
+                            <StackPanel>
+                                <TextBlock Text="{Binding FullName}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Phone}" FontSize="12"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Grid.Row="5" x:Name="ClientMessage" Foreground="Red" Margin="10,5,10,10" TextWrapping="Wrap"/>
+            </Grid>
         </TabItem>
 
+        <!-- ============ ИНВЕНТАРЬ ============ -->
         <TabItem Header="Инвентарь">
-            <ListBox x:Name="ItemsList" Margin="10">
-                <ListBox.ItemTemplate>
-                    <DataTemplate x:DataType="data:Item">
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Size}" FontSize="12"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto">
+                <TextBlock Grid.Row="0" Text="Название:" Margin="10,10,10,0"/>
+                <TextBox Grid.Row="0" x:Name="ItemNameBox" Margin="10,30,10,0"/>
+                
+                <TextBlock Grid.Row="1" Text="Цена (руб/ч):" Margin="10,10,10,0"/>
+                <TextBox Grid.Row="1" x:Name="ItemPriceBox" Margin="10,30,10,0"/>
+
+                <TextBlock Grid.Row="2" Text="Размер:" Margin="10,10,10,0"/>
+                <TextBox Grid.Row="2" x:Name="ItemSizeBox" Margin="10,30,10,0"/>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,10,0,0">
+                    <CheckBox x:Name="ItemAvailableBox" Content="Свободна"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10,10,0,0">
+                    <Button x:Name="AddItemBtn" Content="Добавить" Click="AddItem_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="DeleteItemBtn" Content="Удалить" Click="DeleteItem_Click"/>
+                </StackPanel>
+
+                <ListBox Grid.Row="5" x:Name="ItemsList" Margin="10,10,10,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="data:Item">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Size}" FontSize="12"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Grid.Row="6" x:Name="ItemMessage" Foreground="Red" Margin="10,5,10,10" TextWrapping="Wrap"/>
+            </Grid>
         </TabItem>
 
+        <!-- ============ АРЕНДЫ ============ -->
         <TabItem Header="Аренды">
-            <ListBox x:Name="RentalsList" Margin="10">
-                <ListBox.ItemTemplate>
-                    <DataTemplate x:DataType="data:Rental">
-                        <StackPanel>
-                            <TextBlock Text="{Binding Client.FullName}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Item.Name}"/>
-                            <TextBlock Text="{Binding TotalCost, StringFormat='{}{0} р.'}" FontSize="12"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto">
+                <TextBlock Grid.Row="0" Text="Клиент:" Margin="10,10,10,0"/>
+                <ComboBox Grid.Row="0" x:Name="RentalClientCombo" Margin="10,30,10,0"/>
+
+                <TextBlock Grid.Row="1" Text="Сапборд:" Margin="10,10,10,0"/>
+                <ComboBox Grid.Row="1" x:Name="RentalItemCombo" Margin="10,30,10,0"/>
+
+                <TextBlock Grid.Row="2" Text="Дата аренды:" Margin="10,10,10,0"/>
+                <CalendarDatePicker Grid.Row="2" x:Name="RentalStartDate" Margin="10,30,10,0"/>
+
+                <TextBlock Grid.Row="3" Text="Стоимость (руб):" Margin="10,10,10,0"/>
+                <TextBox Grid.Row="3" x:Name="RentalCostBox" Margin="10,30,10,0"/>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10,10,0,0">
+                    <Button x:Name="AddRentalBtn" Content="Добавить" Click="AddRental_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="DeleteRentalBtn" Content="Удалить" Click="DeleteRental_Click"/>
+                </StackPanel>
+
+                <ListBox Grid.Row="5" x:Name="RentalsList" Margin="10,10,10,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="data:Rental">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Client.FullName}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Item.Name}"/>
+                                <TextBlock Text="{Binding TotalCost, StringFormat='{}{0} р.'}" FontSize="12"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Grid.Row="6" x:Name="RentalMessage" Foreground="Red" Margin="10,5,10,10" TextWrapping="Wrap"/>
+            </Grid>
         </TabItem>
     </TabControl>
 </UserControl>
