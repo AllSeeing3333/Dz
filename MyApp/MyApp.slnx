@@ -1,7 +1,9 @@
-﻿<Solution>
+<Solution>
   <Project Path="MyApp.Android/MyApp.Android.csproj">
     <Deploy />
   </Project>
+  <Project Path="MyApp.ConsoleApp/MyApp.ConsoleApp.csproj" />
+  <Project Path="MyApp.Data/MyApp.Data.csproj" />
   <Project Path="MyApp.Desktop/MyApp.Desktop.csproj" />
   <Project Path="MyApp/MyApp.csproj" />
 </Solution>
