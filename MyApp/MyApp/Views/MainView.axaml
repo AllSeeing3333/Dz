@@ -6,56 +6,14 @@
              x:DataType="vm:MainViewModel">
 
     <TabControl>
-        <!-- Вкладка 1: Клиенты -->
         <TabItem Header="Клиенты">
-            <Grid RowDefinitions="Auto,*">
-                <TextBlock Grid.Row="0" Text="Все клиенты" FontSize="20" Margin="10"/>
-                <ListBox Grid.Row="1" x:Name="ClientsList" Margin="10">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="data:Client">
-                            <StackPanel>
-                                <TextBlock Text="{Binding FullName}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Phone}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
+            <ListBox x:Name="ClientsList" Margin="10"/>
         </TabItem>
-
-        <!-- Вкладка 2: Инвентарь -->
         <TabItem Header="Инвентарь">
-            <Grid RowDefinitions="Auto,*">
-                <TextBlock Grid.Row="0" Text="Все сапборды" FontSize="20" Margin="10"/>
-                <ListBox Grid.Row="1" x:Name="ItemsList" Margin="10">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="data:Item">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Size}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
+            <ListBox x:Name="ItemsList" Margin="10"/>
         </TabItem>
-
-        <!-- Вкладка 3: Аренды -->
         <TabItem Header="Аренды">
-            <Grid RowDefinitions="Auto,*">
-                <TextBlock Grid.Row="0" Text="Все аренды" FontSize="20" Margin="10"/>
-                <ListBox Grid.Row="1" x:Name="RentalsList" Margin="10">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="data:Rental">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Client.FullName}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Item.Name}"/>
-                                <TextBlock Text="{Binding StartTime, StringFormat='{}{0:dd.MM.yyyy}'}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
+            <ListBox x:Name="RentalsList" Margin="10"/>
         </TabItem>
     </TabControl>
 </UserControl>
