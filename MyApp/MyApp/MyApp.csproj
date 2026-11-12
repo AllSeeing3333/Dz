@@ -20,4 +20,8 @@
     <PackageReference Include="CommunityToolkit.Mvvm" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyApp.Data\MyApp.Data.csproj" />
+  </ItemGroup>
 </Project>
