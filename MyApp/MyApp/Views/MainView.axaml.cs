@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using Avalonia.Controls;
-using Microsoft.EntityFrameworkCore;
 using MyApp.Data;
 
 namespace MyApp.Views;
@@ -9,42 +9,21 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
+        LoadData();
+    }
 
-        // Создаем базу и заполняем её при запуске
-        using (var db = new AppDbContext())
+    private void LoadData()
+    {
+        ClientsList.ItemsSource = new List<Client>
         {
-            db.Database.EnsureCreated();
-            DbSeed.Seed(db); 
-        }
-
-        LoadClients();
-        LoadItems();
-        LoadRentals();
-    }
-
-    private void LoadClients()
-    {
-        using var db = new AppDbContext();
-        ClientsList.ItemsSource = db.Clients
-            .OrderBy(c => c.FullName)
-            .ToList();
-    }
-
-    private void LoadItems()
-    {
-        using var db = new AppDbContext();
-        ItemsList.ItemsSource = db.Items
-            .OrderBy(i => i.Name)
-            .ToList();
-    }
-
-    private void LoadRentals()
-    {
-        using var db = new AppDbContext();
-        RentalsList.ItemsSource = db.Rentals
-            .Include(r => r.Client)
-            .Include(r => r.Item)
-            .OrderBy(r => r.StartTime)
-            .ToList();
+            new Client { FullName = "Иван Петров", Phone = "+7 900 111-22-33" },
+            new Client { FullName = "Мария Иванова", Phone = "+7 900 444-55-66" }
+        };
+        ItemsList.ItemsSource = new List<Item>
+        {
+            new Item { Name = "Каминные", Size = "Взрослый" },
+            new Item { Name = "Обычные", Size = "Детский" }
+        };
+        RentalsList.ItemsSource = new List<Rental>();
     }
 }
