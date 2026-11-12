@@ -7,13 +7,43 @@
 
     <TabControl>
         <TabItem Header="Клиенты">
-            <ListBox x:Name="ClientsList" Margin="10"/>
+            <ListBox x:Name="ClientsList" Margin="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="data:Client">
+                        <StackPanel>
+                            <TextBlock Text="{Binding FullName}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Phone}" FontSize="12"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </TabItem>
+
         <TabItem Header="Инвентарь">
-            <ListBox x:Name="ItemsList" Margin="10"/>
+            <ListBox x:Name="ItemsList" Margin="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="data:Item">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Size}" FontSize="12"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </TabItem>
+
         <TabItem Header="Аренды">
-            <ListBox x:Name="RentalsList" Margin="10"/>
+            <ListBox x:Name="RentalsList" Margin="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="data:Rental">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Client.FullName}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Item.Name}"/>
+                            <TextBlock Text="{Binding TotalCost, StringFormat='{}{0} р.'}" FontSize="12"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </TabItem>
     </TabControl>
 </UserControl>
