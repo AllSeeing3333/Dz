@@ -4,4 +4,6 @@
   </Project>
   <Project Path="MyApp.Desktop/MyApp.Desktop.csproj" />
   <Project Path="MyApp/MyApp.csproj" />
+  <Project Path="MyApp.Data/MyApp.Data.csproj" />
+  <Project Path="MyApp.ConsoleApp/MyApp.ConsoleApp.csproj" />
 </Solution>
